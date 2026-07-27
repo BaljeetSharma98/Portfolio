@@ -2,8 +2,6 @@
 
 A futuristic, cyberpunk-inspired developer portfolio built with **React**, **Vite**, and modern web technologies. Designed to showcase my projects, technical skills, and experience through immersive animations and a terminal-inspired interface.
 
-![Portfolio Preview](./public/preview.png)
-
 ---
 
 ## 🚀 Live Demo
@@ -77,14 +75,11 @@ src/
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/portfolio.git
+git clone https://github.com/BaljeetSharma98/Portfolio.git
 ```
 
 Navigate into the project
 
-```bash
-cd portfolio
-```
 
 Install dependencies
 
