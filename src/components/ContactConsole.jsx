@@ -55,7 +55,7 @@ export default function ContactConsole() {
   };
 
   return (
-    <div className="contact-console-section">
+    <div className="contact-console-section" id="transmit">
       <div className="section-header-glow">
         <Mail size={24} className="neon-icon" />
         <h2>SECURE TRANSMISSION</h2>

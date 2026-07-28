@@ -10,6 +10,7 @@ import SkillsMatrix from './components/SkillsMatrix';
 import Timeline from './components/Timeline';
 import ContactConsole from './components/ContactConsole';
 import Terminal from './components/Terminal';
+import { ContactInfo } from './components/ContactInfo';
 
 const projectsData = [
   {
@@ -23,7 +24,7 @@ const projectsData = [
       'Real-time preview & customization options',
       'User authentication & easy downloads'
     ],
-    link: 'https://github.com/BaljeetSharma98'
+    link: 'https://github.com/BaljeetSharma98/Thumblify'
   },
   {
     title: 'College Social Network',
@@ -35,7 +36,7 @@ const projectsData = [
       'Group forums & real-time chat',
       'Post creation with real-time likes & comments'
     ],
-    link: 'https://github.com/BaljeetSharma98'
+    link: 'https://github.com/BaljeetSharma98/SocialMediaApp'
   },
   {
     title: 'Blog Website with Auth',
@@ -47,7 +48,7 @@ const projectsData = [
       'Interactive comment threads',
       'Clean post design with active comments & likes'
     ],
-    link: 'https://github.com/BaljeetSharma98'
+    link: 'https://github.com/BaljeetSharma98/blog-platform'
   }
 ];
 
@@ -104,7 +105,7 @@ export default function App() {
 
   // Scroll spy observer
   useEffect(() => {
-    const sections = ['home', 'projects', 'skills', 'registry', 'contact'];
+    const sections = ['home', 'projects', 'skills', 'registry', 'contact', 'transmit'];
     const observers = sections.map((secId) => {
       const el = document.getElementById(secId);
       if (!el) return null;
@@ -224,6 +225,13 @@ export default function App() {
             href="#contact"
             className={activeSection === 'contact' ? 'active' : ''}
             onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
+          >
+            CONTACT
+          </a>
+          <a
+            href="#transmit"
+            className={activeSection === 'transmit' ? 'active' : ''}
+            onClick={(e) => { e.preventDefault(); handleNavClick('transmit'); }}
           >
             TRANSMIT
           </a>
@@ -352,6 +360,11 @@ export default function App() {
         {/* Section: Education / Certifications */}
         <section id="registry">
           <Timeline />
+        </section>
+
+        {/* Section: Contact Info */}
+        <section id="contact-info">
+          <ContactInfo />
         </section>
 
         {/* Section: Contact Secure */}
