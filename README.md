@@ -146,9 +146,9 @@ baljeetsharma.abc@gmail.com
 
 ## 🤝 Connect With Me
 
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourusername
-- Portfolio: https://your-portfolio-link.vercel.app
+- GitHub: https://github.com/BaljeetSharma98
+- LinkedIn: https://www.linkedin.com/in/baljeet-sharma/
+- Portfolio: https://baljeetportfolio.vercel.app/
 
 ---
 
