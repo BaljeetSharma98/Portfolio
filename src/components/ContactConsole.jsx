@@ -22,37 +22,56 @@ export default function ContactConsole() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      audio.playError();
-      setStatus('error');
-      setTerminalLogs(['[ERROR]: Insufficient packet details. Complete all fields.']);
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!formData.name || !formData.email || !formData.message) {
+    audio.playError();
+    setStatus('error');
+    setTerminalLogs(['[ERROR]: Insufficient packet details. Complete all fields.']);
+    return;
+  }
 
-    audio.playBoot();
-    setStatus('sending');
-    setTerminalLogs([]);
+  audio.playBoot();
+  setStatus('sending');
+  setTerminalLogs([]);
 
-    await addLog('ESTABLISHING SECURE CONNECTION...', 300);
-    await addLog('HANDSHAKE WITH BALJEET.SECURE...', 200);
-    await addLog('ENCRYPTING TRANSLATION DATA...', 300);
-    await addLog('PACKET CONTENTS ENCRYPTED (AES-256)...', 200);
-    await addLog('PREPARING TRANSMISSION TO baljeetsharma.abc@gmail.com...', 300);
-    await addLog('TRANSMITTING DATA PACKET...', 400);
-    
-    setTimeout(async () => {
+  // Terminal animation delays
+  await addLog('ESTABLISHING SECURE CONNECTION...', 300);
+  await addLog('HANDSHAKE WITH BALJEET.SECURE...', 200);
+  await addLog('ENCRYPTING TRANSLATION DATA...', 300);
+
+  try {
+    // Make actual API call to save to MongoDB & trigger email
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    await addLog('SAVING PACKET TO ATLAS DATABASE...', 200);
+    await addLog('DISPATCHING NEURAL NOTIFICATION...', 300);
+
+    if (response.ok) {
       audio.playSuccess();
       setStatus('success');
       setTerminalLogs((prev) => [
         ...prev,
-        '[SUCCESS]: Packet transmission complete!',
-        '[CONFIRMATION]: Baljeet has been notified via sub-neural link.'
+        '[SUCCESS]: Message saved to Database!',
+        '[CONFIRMATION]: Baljeet notified via email.',
       ]);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 600);
-  };
+    } else {
+      throw new Error('Server returned non-200 status');
+    }
+  } catch (err) {
+    audio.playError();
+    setStatus('error');
+    setTerminalLogs((prev) => [
+      ...prev,
+      '[ERROR]: Transmission failed. Signal interrupted.',
+    ]);
+  }
+};
 
   return (
     <div className="contact-console-section" id="transmit">
