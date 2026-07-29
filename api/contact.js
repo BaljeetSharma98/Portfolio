@@ -1,13 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { Resend } from 'resend';
 
-
-
-console.log("Mongo URI:", process.env.MONGODB_URI);
-console.log("Resend:", process.env.RESEND_API_KEY);
-
-
-
 const client = new MongoClient(process.env.MONGODB_URI);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
