@@ -1602,3 +1602,78 @@ section {
 .download-btn:hover .download-icon {
   transform: translateY(2px);
 }
+
+
+/* Project Show more and less button */
+/* Container alignment */
+.toggle-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* Neon Cyberpunk Toggle Button */
+.toggle-projects-btn {
+  background: transparent;
+  color: #00f3ff; /* Electric cyan color - adjust to match your primary neon accent */
+  border: 1.5px solid #00f3ff;
+  padding: 0.75rem 2rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+  overflow: hidden;
+}
+
+/* Hover effect with glow expansion */
+.toggle-projects-btn:hover {
+  background: rgba(0, 243, 255, 0.15);
+  color: #ffffff;
+  border-color: #00f3ff;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Click feedback */
+.toggle-projects-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+
+
+/* Smooth Grid Expansion Container */
+.projects-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Smooth Fade and Slide-Down for Animated Cards */
+.project-card-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+/* Keyframe for entering cards */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDownFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal as TerminalIcon, Volume2, VolumeX, Code, Cpu, BookOpen, Mail, ExternalLink } from 'lucide-react';
+import { Terminal as TerminalIcon, Volume2, VolumeX, Code, Cpu, BookOpen, Mail, ExternalLink, ChevronUp, ChevronDown } from 'lucide-react';
 import { audio } from './utils/audio';
 import astronautImg from './assets/astronaut.png';
 
@@ -49,7 +49,110 @@ const projectsData = [
       'Clean post design with active comments & likes'
     ],
     link: 'https://github.com/BaljeetSharma98/blog-platform'
-  }
+  },
+  {
+  title: 'Movie Recommender',
+  date: 'Jul 2026',
+  description: 'A modern React-based movie discovery application that allows users to browse trending movies, search by title, and manage a personalized favorites collection using the TMDB API.',
+  tools: [
+    'React.js',
+    'Vite',
+    'React Router DOM',
+    'Context API',
+    'CSS3',
+    'TMDB API',
+    'Local Storage'
+  ],
+  features: [
+    'Browse popular and trending movies',
+    'Search movies instantly using TMDB API',
+    'Add and remove favorite movies with Local Storage',
+    'Responsive UI with fast Vite-powered performance'
+  ],
+  link: 'https://github.com/BaljeetSharma98/Movie-Recommender'
+},
+{
+  title: 'E-Commerce Platform',
+  date: 'Jul 2026',
+  description: 'A full-stack e-commerce web application built with React, Node.js, Express, and PostgreSQL, featuring secure user authentication, product management, and RESTful APIs.',
+  tools: [
+    'React.js',
+    'Vite',
+    'Node.js',
+    'Express.js',
+    'PostgreSQL',
+    'Sequelize ORM',
+    'JWT',
+    'Axios',
+    'bcrypt.js'
+  ],
+  features: [
+    'Secure user registration and login with JWT authentication',
+    'Browse and add products through RESTful APIs',
+    'PostgreSQL database integration using Sequelize ORM',
+    'Responsive React frontend with seamless API communication'
+  ],
+  link: 'https://github.com/BaljeetSharma98/Full-Stack-E-Commerce-Website'
+},
+{
+  title: 'Sales Dashboard',
+  date: 'Jul 2026',
+  description: 'A modern analytics dashboard built with Next.js and TypeScript that transforms sales data into interactive charts and actionable business insights for monitoring revenue, profit, and overall performance.',
+  tools: [
+    'Next.js',
+    'TypeScript',
+    'Tailwind CSS',
+    'Recharts',
+    'PapaParse',
+    'CSV Dataset'
+  ],
+  features: [
+    'Interactive dashboard with revenue, profit, and order KPIs',
+    'Dynamic charts for monthly sales trends and category-wise analysis',
+    'Region and product performance insights using visual analytics',
+    'Responsive interface with fast client-side data processing'
+  ],
+  link: 'https://github.com/BaljeetSharma98/sales-dashboard'
+},
+{
+  title: 'Weather Application',
+  date: 'Jul 2026',
+  description: 'A responsive weather application built with React that delivers real-time weather updates for any city using live weather APIs, featuring a clean interface and dynamic weather information.',
+  tools: [
+    'React.js',
+    'Vite',
+    'JavaScript',
+    'CSS3',
+    'Weather API',
+    'Axios'
+  ],
+  features: [
+    'Search weather conditions for cities worldwide',
+    'Display real-time temperature, humidity, wind speed, and weather conditions',
+    'Responsive user interface with dynamic weather updates',
+    'Fast API integration with error handling for invalid city searches'
+  ],
+  link: 'https://github.com/BaljeetSharma98/Weather-Application-React'
+},
+{
+  title: 'BMI Calculator',
+  date: 'Jul 2026',
+  description: 'A responsive BMI Calculator built with React that calculates Body Mass Index from user inputs and provides instant health classification based on standard BMI ranges.',
+  tools: [
+    'React.js',
+    'Vite',
+    'JavaScript',
+    'CSS3'
+  ],
+  features: [
+    'Calculate BMI using height and weight inputs',
+    'Instant BMI classification (Underweight, Normal, Overweight, Obese)',
+    'Responsive and user-friendly interface',
+    'Real-time calculation with input validation'
+  ],
+  link: 'https://github.com/BaljeetSharma98/BMI-Calculator'
+},
+
 ];
 
 const typewriterWords = [
@@ -66,6 +169,8 @@ export default function App() {
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [isClicking, setIsClicking] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   // Typewriter state
   const [wordIdx, setWordIdx] = useState(0);
@@ -337,21 +442,48 @@ export default function App() {
           </div>
         </section>
 
-        {/* Section: Projects */}
-        <section id="projects">
-          <div className="section-header-glow">
-            <Code size={24} className="neon-icon" />
-            <h2>PROJECT ARCHIVES</h2>
-            <div className="accent-bar" />
-          </div>
+{/* Section: Projects */}
+<section id="projects">
+  <div className="section-header-glow">
+    <Code size={24} className="neon-icon" />
+    <h2>PROJECT ARCHIVES</h2>
+    <div className="accent-bar" />
+  </div>
 
-          <div className="projects-deck-grid">
-            {projectsData.map((project, idx) => (
-              <ProjectCard key={idx} project={project} />
-            ))}
-          </div>
-        </section>
+  <div className="projects-deck-grid">
+    {(showAllProjects ? projectsData : projectsData.slice(0, 3)).map((project, idx) => (
+      <div 
+        key={project.link || idx} 
+        className={`project-card-wrapper ${idx >= 3 ? 'animate-slide-down' : ''}`}
+      >
+        <ProjectCard project={project} />
+      </div>
+    ))}
+  </div>
 
+  {/* Styled Toggle Button */}
+  {projectsData.length > 3 && (
+    <div className="toggle-btn-container">
+      <button 
+        onClick={() => {
+          audio.playBoot();
+          setShowAllProjects(!showAllProjects);
+          if (showAllProjects) {
+            // Smoothly scroll back up to the projects section when collapsing
+            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        className="toggle-projects-btn"
+        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+      >
+        <span>{showAllProjects ? 'SHOW LESS' : 'SHOW MORE'}</span>
+        {showAllProjects ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+      </button>
+    </div>
+  )}
+</section>
+
+        
         {/* Section: Skills */}
         <section id="skills">
           <SkillsMatrix />
